@@ -53,10 +53,26 @@ func BilanganHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params
 	}
 }
 
+func MaulCoba(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	var response string
+	var response2 int64
+
+	response = "hello"
+	response2 = 2
+
+	_ = response //cara curang kalo gak mau manggil variabel yg tidak kepake
+	// r2 := fmt.Sprintf("%s %d", response, response2)
+
+	arrByte := []byte(strconv.FormatInt(response2, 10))
+
+	w.Write(arrByte)
+}
+
 func main() {
 	router := httprouter.New()
 
 	router.GET("/calculator", BilanganHandler)
+	router.GET("/maul", MaulCoba)
 
 	http.ListenAndServe(":9001", router)
 }
